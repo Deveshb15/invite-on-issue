@@ -1,4 +1,4 @@
-# github-actions-test
+# Invite-on-issue
 
 ### Example:
 
@@ -19,4 +19,6 @@ jobs:
         with:
           organization: EddieJaoudeCommunity
           label: invite me to the organisation
-```
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+``` 
