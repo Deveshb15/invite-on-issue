@@ -3,11 +3,11 @@ const github = require('@actions/github');
 
 const main = async () => {
     try {
-        // const { ACCESS_TOKEN } = process.env
-        // if (!ACCESS_TOKEN)
-        //     return core.setFailed('ENV required and not supplied: ACCESS_TOKEN')
+        const { ACCESS_TOKEN } = process.env
+        if (!ACCESS_TOKEN)
+            return core.setFailed('ENV required and not supplied: ACCESS_TOKEN')
 
-        // const octokit = new github.GitHub(ACCESS_TOKEN)
+        const octokit = new github.GitHub(ACCESS_TOKEN)
 
         const payload = github.context.payload
         const invitee_id = payload.issue.user.id
@@ -20,11 +20,11 @@ const main = async () => {
             console.log('testing, both are same. Invitation can be sent')
             console.log(invitee_id, org)
             console.log("label:", label, "invite:", invitee_id)
-            // await octokit.orgs.createInvitation({
-            //     org,
-            //     invitee_id
-            // })
-            // console.log("Successfully sent invitation")
+            await octokit.orgs.createInvitation({
+                org,
+                invitee_id
+            })
+            console.log("Successfully sent invitation")
         }
 
     } catch (error) {
