@@ -1,11 +1,10 @@
-name: Test with issue lable
+name: Automate_issue_invite
 on:
   issues:
     types: [labeled]
 
 jobs:
-  job2:
-    if: github.event.label.name == 'bug'
+  automate_invite:
     runs-on: ubuntu-latest
     name: Check for issue label
     steps:
@@ -13,3 +12,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Run the local file
         uses: ./
+          with:
+            organization: EddieJaoudeCommunity
+            label: invite me to the organisation
