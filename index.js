@@ -1,10 +1,13 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { ACCESS_TOKEN } = process.env
 
 const main = async () => {
     try {
-        const octokit = new github.GitHub(ACCESS_TOKEN)
+        const { ACCESS_TOKEN } = process.env
+        if (!ACCESS_TOKEN)
+            return core.setFailed('ENV required and not supplied: ACCESS_TOKEN')
+
+        // const octokit = new github.GitHub(ACCESS_TOKEN)
 
         const payload = github.context.payload
         const invitee_id = payload.issue.user.id
