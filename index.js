@@ -17,9 +17,6 @@ const main = async () => {
         const label = core.getInput('label', { required: true })
 
         if (currentLabel === label) {
-            console.log('testing, both are same. Invitation can be sent')
-            console.log(invitee_id, org)
-            console.log("label:", label, "invite:", invitee_id)
             await octokit.orgs.createInvitation({
                 org,
                 invitee_id
