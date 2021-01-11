@@ -16,11 +16,20 @@ const main = async () => {
         const org = core.getInput('organization', { required: true })
         const label = core.getInput('label', { required: true })
 
-        if (currentLabel === label) {
-            await octokit.orgs.createInvitation({
-                org,
-                invitee_id
-            })
+        if (currentLabel === label) {            
+            try{
+                await octokit.orgs.checkMembership({
+                    org: org,
+                    username: payload.issue.user.login
+                  })
+
+            } catch (error) {
+                await octokit.orgs.createInvitation({
+                    org,
+                    invitee_id
+                })
+            }
+
             console.log("Successfully sent invitation")
         }
 
